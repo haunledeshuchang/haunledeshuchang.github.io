@@ -1,7 +1,9 @@
+---
 layout: post
 title: 私募股权投资退出机制
-category: 读书
+category: 私募基金
 tags: happy,awesome（多个标签）
+---
 
 # 前言
 
