@@ -1,0 +1,33 @@
+name: Deploy Hexo Blog
+
+on:
+  push:
+    branches:
+      - main  # 当你在 main 分支推送时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 使用 Node.js 20 版本
+
+      - name: Install Hexo & Dependencies
+        run: |
+          npm install hexo-cli -g
+          npm install
+
+      - name: Generate Static Files
+        run: hexo generate
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages  # 部署到 gh-pages 分支
